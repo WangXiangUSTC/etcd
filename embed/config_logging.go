@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"runtime/debug"
 	"reflect"
 	"sync"
 
@@ -276,6 +277,7 @@ func (cfg *Config) setupLogging() error {
 					zap.Error(err),
 				)
 			} else {
+				debug.PrintStack()
 				cfg.logger.Warn(
 					"rejected connection",
 					zap.String("remote-addr", remoteAddr),
