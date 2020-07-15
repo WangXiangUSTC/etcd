@@ -310,7 +310,7 @@ type accessController struct {
 }
 
 func (ac *accessController) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	ac.lg.Info("server http", zap.Reflect("request", req))
+	ac.lg.Info("server http", zap.Reflect("url", req.URL), zap.String("method", req.Method))
 	// redirect for backward compatibilities
 	if req != nil && req.URL != nil && strings.HasPrefix(req.URL.Path, "/v3beta/") {
 		req.URL.Path = strings.Replace(req.URL.Path, "/v3beta/", "/v3/", 1)
